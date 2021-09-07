@@ -53,7 +53,7 @@ def run_stage2(offer, db, table, url_tuple, id_tuple, img_tuple, start_idx, end_
             continue
         id = id_tuple[img_index][0]
         img = img_tuple[img_index][0]
-        if table == 'fix' or 'kilimall':
+        if table == 'fix' or table == 'kilimall':
             id1 = id + '_1'
             id2 = id + '_2'
         else:
