@@ -1,12 +1,12 @@
 from stage_1 import kikuu, kilimall, fix, jjshouse, lovelywholesale, valueco, wholesale7, \
-    dealhub, snatcher
+    dealhub, snatcher, jumia
 from alibaba import stage2,stage3
 import time
 import multiprocessing
 
 
 tableList = ['kikuu', 'kilimall', 'fix', 'jjhouse', 'lovelywholesale', 'valueco', 'wholesale7', 'dealhub',
-             'snatcher']
+             'snatcher', 'jumia']
 
 
 # 得到日期
@@ -53,7 +53,9 @@ if __name__ == '__main__':
 
     if stage == 1:
         if table == 'kilimall':
-            category = input("Please select from [kitchen_supply, men_shoe, women_bag]")
+            category = input("Please select from [kitchen_supply, men_shoe, women_bag]:")
+            if category not in ['kitchen_supply', 'men_shoe', 'women_bag']:
+                print("Invalid input, please retry")
             firstStage(kilimall, db, table, category=category)
         elif table == 'kikuu':
             firstStage(kikuu, db, table)
@@ -61,6 +63,8 @@ if __name__ == '__main__':
             firstStage(valueco, db, table)
         elif table == 'snatcher':
             firstStage(snatcher, db, table)
+        elif table == 'jumia':
+            firstStage(jumia, db, table)
 
     elif stage == 2:
         accessToken = input('Please enter the updated access token:')
