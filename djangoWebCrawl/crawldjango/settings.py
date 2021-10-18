@@ -12,10 +12,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import sys
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-sys.path.insert(0,os.path.join(BASE_DIR,'apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -25,11 +27,10 @@ SECRET_KEY = '&lt2ha=xa_@l%gj%nbw(w(rs$m0(%=gx5-rt9_t^y*+icm*!)k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.65','127.0.0.1']
+ALLOWED_HOSTS = ['192.168.0.65', '127.0.0.1']
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
 
 # Application definition
 
@@ -46,13 +47,14 @@ INSTALLED_APPS = [
     'DjangoUeditor',
     'import_export',
     'crawlmodel.apps.CrawlmodelConfig',
+    'SAwebsite.apps.SawebsiteConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -78,19 +80,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'crawldjango.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        #可以通过
+        # 可以通过
         'ENGINE': 'django.db.backends.mysql',
-        'HOST':'localhost',#主机号
-        'PORT':'3306',#端口号
-        'USER':'root',#用户名
-        'PASSWORD':'1999',#密码
-        'NAME': 'mysql02',#指定数据库
+        'HOST': 'localhost',  # 主机号
+        'PORT': '3306',  # 端口号
+        'USER': 'root',  # 用户名
+        'PASSWORD': '1999',  # 密码
+        'NAME': 'mysql02',  # 指定数据库
     }
 }
 
@@ -112,26 +113,33 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'zh-Hans'
-#亚洲上海时区
+# 亚洲上海时区
 TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
-
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS=[
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+# 邮箱配置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.126.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'huchenchuhui@126.com'
+EMAIL_HOST_PASSWORD = 'WDRYHIYPTTJJWKVL'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

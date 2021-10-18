@@ -121,6 +121,10 @@ def main(offer, db, table, img_path):
     img_tuple = conn.query_data("Image")
     url_tuple = conn.query_data("offer_url")
     num_rows = len(id_tuple)
+    print(num_rows)
+    lb = int(input('Enter the lower bound: '))
+    ub = int(input('Enter the upper bound: '))
+    num_rows = ub - lb + 1
     threads = []
     threadNum = 6
     start_idx = []
@@ -128,11 +132,13 @@ def main(offer, db, table, img_path):
     num_items = int(num_rows / 3)
     increment = int(num_items / threadNum)
     for i in range(threadNum):
-        start_idx.append(0 + increment * i)
+        start_idx.append(int(lb/3) + increment * i)
         if i == threadNum - 1:
-            end_idx.append(num_items)
+            end_idx.append(int(ub/3))
         else:
-            end_idx.append(increment * (i+1))
+            end_idx.append(int(lb/3) + increment * (i+1))
+    print(start_idx)
+    print(end_idx)
     for i in range(1, threadNum + 1):
         threads.append(threading.Thread(target=run_stage2, args=(offer, db, table, url_tuple, id_tuple, img_tuple, start_idx[i - 1], end_idx[i - 1], img_path, )))
     for t in threads:

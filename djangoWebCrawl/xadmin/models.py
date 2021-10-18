@@ -8,15 +8,14 @@ from django.utils.translation import ugettext_lazy as _, ugettext
 from django.urls.base import reverse
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models.base import ModelBase
-from six import python_2_unicode_compatible
-from django.utils.encoding import smart_text
+from django.utils.encoding import python_2_unicode_compatible, smart_text
 
 from django.db.models.signals import post_migrate
 from django.contrib.auth.models import Permission
 
 import datetime
 import decimal
-# from xadmin.util import quote
+from xadmin.util import quote
 
 AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 

@@ -59,13 +59,23 @@ class SQL:
         cursor.execute(query)
         self.conn.commit()
 
-    def add_col(self,col_name,after_name,input_type):
+    def generalInsert(self, field: str, val: str):
+        query = f'''
+                    insert ignore into {self.table} {field}
+                    values {val}
+                '''
+        print(query)
+        cursor = self.conn.cursor()
+        cursor.execute(query)
+        self.conn.commit()
+
+    def add_col(self, col_name, after_name, input_type):
         query = f'ALTER TABLE {self.table} ADD COLUMN {col_name} {input_type} AFTER {after_name}'
         cursor = self.conn.cursor()
         cursor.execute(query)
         self.conn.commit()
 
-    def drop_col(self,col_name):
+    def drop_col(self, col_name):
         query = f"ALTER TABLE {self.table} DROP COLUMN {col_name}"
         cursor = self.conn.cursor()
         cursor.execute(query)
@@ -77,7 +87,7 @@ class SQL:
         cursor.execute(query)
         return cursor.fetchall()[0][0]
 
-    def update_table(self,col_name,data,key_name,key, stage):
+    def update_table(self, col_name, data, key_name, key, stage):
         if stage == 2:
             for i in range(len(col_name)):
                 query = f'''
@@ -85,9 +95,7 @@ class SQL:
                                                     SET {col_name[i]} = "{data[i]}"
                                                     WHERE {key_name} = "{key}"
                                                     '''
-                cursor = self.conn.cursor()
-                cursor.execute(query)
-                self.conn.commit()
+
         elif stage == 3:
             query = f'''
                     UPDATE {self.table}
@@ -106,6 +114,21 @@ class SQL:
                     WHERE 
                         {key_name} = "{key}"
                     '''
-            cursor = self.conn.cursor()
-            cursor.execute(query)
-            self.conn.commit()
+        else:
+            set_q = ''
+            for i in range(2):
+                if i == 0:
+                    set_q = set_q + f'{col_name[i]} = "{data[i]}"'
+                else:
+                    set_q = set_q + f',{col_name[i]} = "{data[i]}"'
+
+            query = f'''
+                                UPDATE {self.table}
+                                SET 
+                                    {set_q}
+                                WHERE 
+                                    {key_name} = "{key}"
+                                '''
+        cursor = self.conn.cursor()
+        cursor.execute(query)
+        self.conn.commit()

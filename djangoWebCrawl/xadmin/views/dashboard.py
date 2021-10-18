@@ -24,6 +24,7 @@ from xadmin.views.base import CommAdminView, ModelAdminView, filter_hook, csrf_p
 from xadmin.views.edit import CreateAdminView
 from xadmin.views.list import ListAdminView
 from xadmin.util import unquote
+from django.contrib.auth.models import User
 import copy
 
 
@@ -544,17 +545,21 @@ class Dashboard(CommAdminView):
     def get_widgets(self):
 
         if self.widget_customiz:
+            user_obj = User.objects.get_by_natural_key("yoyoyuan")
             portal_pos = UserSettings.objects.filter(
-                user=self.user, key=self.get_portal_key())
+                user=user_obj, key=self.get_portal_key())
             if len(portal_pos):
                 portal_pos = portal_pos[0].value
+                print(UserWidget.objects.filter(page_id=self.get_page_id()))
                 widgets = []
 
                 if portal_pos:
-                    user_widgets = dict([(uw.id, uw) for uw in UserWidget.objects.filter(user=self.user, page_id=self.get_page_id())])
+                    user_widgets = dict([(uw.id, uw) for uw in UserWidget.objects.filter(page_id=self.get_page_id())])
+                    print(user_widgets)
                     for col in portal_pos.split('|'):
                         ws = []
                         for wid in col.split(','):
+                            print(wid)
                             try:
                                 widget = user_widgets.get(int(wid))
                                 if widget:
@@ -563,7 +568,7 @@ class Dashboard(CommAdminView):
                                 import logging
                                 logging.error(e, exc_info=True)
                         widgets.append(ws)
-
+                print(widgets)
                 return widgets
 
         return self.get_init_widget()
