@@ -97,7 +97,8 @@ def run_stage1(db, table,flag, start_idx, end_idx):
             conn.insertData(id2, img, title, price)
             print("Write Success, item", id)
 
-def main1(db, table):
+
+def main(db, table):
     li = lovelywholesaleinfo()
     flags=['hot','new']
 

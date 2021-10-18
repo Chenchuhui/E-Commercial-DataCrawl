@@ -86,12 +86,12 @@ class DeleteSelectedAction(BaseActionView):
         if not self.has_delete_permission():
             raise PermissionDenied
 
-        using = router.db_for_write(self.model)
+        # using = router.db_for_write(self.model)
 
         # Populate deletable_objects, a data structure of all related objects that
         # will also be deleted.
         deletable_objects, model_count, perms_needed, protected = get_deleted_objects(
-            queryset, self.opts, self.user, self.admin_site, using)
+            queryset, self.opts,self.admin_site)
 
         # The user has already confirmed the deletion.
         # Do the deletion and return a None to display the change list view again.

@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractBaseUser
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 from .forms import SettingForm

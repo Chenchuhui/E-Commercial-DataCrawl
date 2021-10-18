@@ -7,6 +7,8 @@ from requests import utils
 from sql import mysql
 from alibaba import encrypt
 import threading
+from alibaba import seleniumTest
+from goto import with_goto
 
 col_list = ["saledCount", "weight", "num_comment", "rateAverageStarLevel", "good_percent", "service",
             "wwxy", "cfmj", "zrs", "deliverySpeed", "huitou"]
@@ -152,7 +154,8 @@ def get_offerInfo(offerDic: dict, attribute: str):
     return result
 
 
-def run_stage3(cookies, db, table, url_tuple, indicator_tuple, start_idx, end_idx):
+@with_goto
+def run_stage3(cookies, db, table, ID_tuple, url_tuple, indicator_tuple1, indicator_tuple2, start_idx, end_idx):
     global col_list
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -161,12 +164,14 @@ def run_stage3(cookies, db, table, url_tuple, indicator_tuple, start_idx, end_id
     conn = mysql.SQL(db, table)
     conn.enter_database()
     conn.enter_table()
-
     for idx in range(start_idx, end_idx):
         try:
-            if indicator_tuple[idx][0] is None:
+            label.begin
+            if indicator_tuple1[idx][0] is None or indicator_tuple2[idx][0] == 0:
                 i = 1  # 过滑块的验证限制: 10次
                 url = url_tuple[idx][0]
+                if url is None:
+                    continue
                 m_html = None
                 offerId = get_offerId(url)
                 mobile_url = f"https://m.1688.com/offer/{offerId}.html"
@@ -199,7 +204,10 @@ def run_stage3(cookies, db, table, url_tuple, indicator_tuple, start_idx, end_id
                 while True:
                     if flag == 4:
                         print("Cookies need to be updated!")
-                        return
+                        new_cookies = seleniumTest.get_new_cookies()
+                        cookies['_m_h5_tk'] = new_cookies[0]
+                        cookies['_m_h5_tk_enc'] = new_cookies[1]
+                        goto.begin
                     if commentDic['ret'] != ['SUCCESS::调用成功'] and offerDic['ret'] != ['SUCCESS::调用成功']:
                         commentDic = encrypt_method.get_commentDic()
                         offerDic = encrypt_method.get_offerDic()
@@ -220,7 +228,7 @@ def run_stage3(cookies, db, table, url_tuple, indicator_tuple, start_idx, end_id
                 # 包装所有获得的信息并传入数据库
                 data_list = [saledCount, weight, num_comment,
                              rateAverageStarLevel, good_percent, service, wwxy, cfmj, zrs, deliverySpeed, huitou]
-                conn.update_table(col_list, data_list, "offer_url", url, 3)
+                conn.update_table(col_list, data_list, "id", ID_tuple[idx][0], 3)
                 print("Write Success", url)
 
                 # 休眠一下防止访问过快有冲突
@@ -230,28 +238,52 @@ def run_stage3(cookies, db, table, url_tuple, indicator_tuple, start_idx, end_id
             print(e)
             time.sleep(1)
 
+# class TaskThread(threading.Thread):
+#     def __init__(self, func, args=()):
+#         super(TaskThread, self).__init__()
+#         self.func = func
+#         self.args = args
+#
+#     def run(self):
+#         self.result = self.func()
 
-def main(cookies, db, table):
+
+def get_num_rows(db, table):
     conn = mysql.SQL(db, table)
     conn.enter_database()
     conn.enter_table()
     url_tuple = conn.query_data("offer_url")
+    return len(url_tuple)
+
+
+def main(db, table, lowBound, upperBound):
+    conn = mysql.SQL(db, table)
+    conn.enter_database()
+    conn.enter_table()
+    ID_tuple = conn.query_data('id')
+    url_tuple = conn.query_data("offer_url")
     service_tuple = conn.query_data("service")
-    num_rows = len(url_tuple)
+    saledcount_tuple = conn.query_data('saledCount')
+    num_rows = upperBound - lowBound + 1
     threads = []
     threadNum = 6
     start_idx = []
     end_idx = []
     increment = int(num_rows / threadNum)
+    cookies = {'_m_h5_tk': '',
+               '_m_h5_tk_enc': ''}
+    new_cookies = seleniumTest.get_new_cookies()
+    cookies['_m_h5_tk'] = new_cookies[0]
+    cookies['_m_h5_tk_enc'] = new_cookies[1]
     for i in range(threadNum):
-        start_idx.append(0 + increment * i)
+        start_idx.append(lowBound + increment * i)
         if i == threadNum - 1:
-            end_idx.append(num_rows)
+            end_idx.append(upperBound)
         else:
-            end_idx.append(increment * (i + 1))
+            end_idx.append(lowBound + increment * (i + 1))
     for i in range(1, threadNum + 1):
         threads.append(threading.Thread(target=run_stage3, args=(
-            cookies, db, table, url_tuple, service_tuple, start_idx[i - 1], end_idx[i - 1],)))
+            cookies, db, table, ID_tuple, url_tuple, service_tuple, saledcount_tuple, start_idx[i - 1], end_idx[i - 1],)))
     for t in threads:
         t.start()
 

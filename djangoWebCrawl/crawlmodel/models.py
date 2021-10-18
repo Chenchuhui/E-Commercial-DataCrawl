@@ -91,6 +91,13 @@ class dealhubmodel(Basemodel):
         # 修改后台admin的显示信息
         verbose_name_plural = 'DEALHUB'
 
+class jumiamodel(Basemodel):
+    picture=models.ImageField(upload_to="jumia_img/",verbose_name='商品图片',default='static/default.jpg')
+    class Meta:
+        # 修改数据库中的表名，默认表明是 子应用_子应用info
+        db_table = 'jumia'
+        # 修改后台admin的显示信息
+        verbose_name_plural = 'JUMIA'
 
 class jjshousemodel(Basemodel):
     picture=models.ImageField(upload_to="jjshouse_img/",verbose_name='商品图片',default='static/default.jpg')
@@ -119,6 +126,40 @@ class wholesale7model(Basemodel):
         db_table = 'wholesale7'
         # 修改后台admin的显示信息
         verbose_name_plural = 'WHOLESALE7'
+
+
+class bidorbuymodel(Basemodel):
+    picture=models.ImageField(upload_to="bidorbuy_img/",verbose_name='商品图片',default='static/default.jpg',null=True)
+
+    class Meta:
+        # 修改数据库中的表名，默认表明是 子应用_子应用info
+        db_table = 'bidorbuy'
+        # 修改后台admin的显示信息
+        verbose_name_plural = 'BIDORBUY'
+
+
+class ackermansmodel(Basemodel):
+    picture=models.ImageField(upload_to="ackermans_img/",verbose_name='商品图片',default='static/default.jpg',null=True)
+
+    class Meta:
+        db_table = 'ackermans'
+        verbose_name_plural = 'ACKERMANS'
+
+
+class cjdropshippingmodel(Basemodel):
+    picture=models.ImageField(upload_to="cjdropshipping_img/",verbose_name='商品图片',default='static/default.jpg',null=True)
+
+    class Meta:
+        db_table = 'cjdropshipping'
+        verbose_name_plural = 'CJDROPSHOPPING'
+
+
+class mrpmodel(Basemodel):
+    picture=models.ImageField(upload_to="mrpmodel_img/",verbose_name='商品图片',default='static/default.jpg',null=True)
+
+    class Meta:
+        db_table = 'mrp'
+        verbose_name_plural = 'MRP'
 
 
 class settingmodel(models.Model):

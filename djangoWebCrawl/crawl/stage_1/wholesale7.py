@@ -26,8 +26,6 @@ class wholesale7info(object):
         return max_page_num
 
 
-
-
 def run_stage1(db, table,url, start_idx, end_idx):
     conn = mysql.SQL(db, table)
     conn.enter_database()
@@ -79,7 +77,8 @@ def run_stage1(db, table,url, start_idx, end_idx):
 
             print("Write Success, item", id)
 
-def main1(db, table):
+
+def main(db, table):
     wi = wholesale7info()
     urls=[wi.hot_url,wi.new_url]
 
