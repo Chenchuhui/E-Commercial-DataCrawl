@@ -1,6 +1,6 @@
 import aop
 from sql import mysql
-from alibaba import download_pic_mysql
+from alibaba import download_pic
 from alibaba import oss
 import threading
 import time
@@ -32,7 +32,7 @@ def read_timeout_retry(img_url, id,img_path):
     i = 0
     while i <= 3:
         try:
-            status = download_pic_mysql.call_download_pic(img_path,img_url,id)
+            status = download_pic.call_download_pic(img_path,img_url,id)
             print("Retry Successfully")
             return status
         except:
@@ -63,7 +63,7 @@ def run_stage2(offer, db, table, url_tuple, id_tuple, img_tuple, start_idx, end_
 
         # Download product image
         try:
-            status = download_pic_mysql.call_download_pic(img, img_path, id)
+            status = download_pic.call_download_pic(img, img_path, id)
         except:
             # This happens because of download timeout
             status = read_timeout_retry(img, id, img_path)
