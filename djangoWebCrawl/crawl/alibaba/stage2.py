@@ -11,7 +11,7 @@ class offer:
         aop.set_default_server('gw.open.1688.com')
         aop.set_timestamp_generator(aop.get_local_timestamp())
         self.req = aop.api.AlibabaCrossSimilarOfferSearchParam()
-        self.req.set_appinfo(appkey=5798411, secret='LRW8f5ft6M')
+        self.req.set_appinfo(appkey='Your app key', secret='Your Password')
         self.req.access_token = access_token
 
     def get_response(self, **kwargs):

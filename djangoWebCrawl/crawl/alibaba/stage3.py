@@ -130,7 +130,7 @@ def decodeSpecialChar(str_text):
 
 def slideVerify(cookies, html):
     print('需要过滑动')
-    zt = getx5(html, '3dd61976158bf21b1533eb8ee1deb5d9')
+    zt = getx5(html, 'app key') # app key from Benben Website
     if zt != 0:
         cookies.update(zt)  # 更新cookie 把x5cookie更新到cookie里面去
     else:
