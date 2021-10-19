@@ -7,7 +7,7 @@ from requests import utils
 from sql import mysql
 from alibaba import encrypt
 import threading
-from alibaba import seleniumTest
+from alibaba import getcookies
 from goto import with_goto
 
 col_list = ["saledCount", "weight", "num_comment", "rateAverageStarLevel", "good_percent", "service",
@@ -204,7 +204,7 @@ def run_stage3(cookies, db, table, ID_tuple, url_tuple, indicator_tuple1, indica
                 while True:
                     if flag == 4:
                         print("Cookies need to be updated!")
-                        new_cookies = seleniumTest.get_new_cookies()
+                        new_cookies = getcookies.get_new_cookies()
                         cookies['_m_h5_tk'] = new_cookies[0]
                         cookies['_m_h5_tk_enc'] = new_cookies[1]
                         goto.begin
@@ -272,7 +272,7 @@ def main(db, table, lowBound, upperBound):
     increment = int(num_rows / threadNum)
     cookies = {'_m_h5_tk': '',
                '_m_h5_tk_enc': ''}
-    new_cookies = seleniumTest.get_new_cookies()
+    new_cookies = getcookies.get_new_cookies()
     cookies['_m_h5_tk'] = new_cookies[0]
     cookies['_m_h5_tk_enc'] = new_cookies[1]
     for i in range(threadNum):

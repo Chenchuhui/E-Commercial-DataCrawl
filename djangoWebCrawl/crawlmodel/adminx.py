@@ -1,7 +1,7 @@
 import xadmin
 from .models import kikuumodel, snatchermodel, fixmodel, jjshousemodel, lovelywholesalemodel, \
     wholesale7model, kilimallmodel, dealhubmodel, valuecomodel, jumiamodel, bidorbuymodel, ackermansmodel, \
-    cjdropshippingmodel, mrpmodel
+    cjdropshippingmodel, mrpmodel,zandomodel
 
 from import_export import resources
 from .views import TestView
@@ -106,6 +106,10 @@ class cjdropshippingResource(resources.ModelResource):
 class mrpResource(resources.ModelResource):
     class Meta:
         model = mrpmodel
+
+class zandoResource(resources.ModelResource):
+    class Meta:
+        model = zandomodel
 #######################下述为后台类，负责后台配置###############################################
 class baseAdmin(object):
     # 展示的数据列名
@@ -189,6 +193,10 @@ class cjdropshippingAdmin(baseAdmin):
 class mrpAdmin(baseAdmin):
     import_export_args = {'import_resource_class': mrpResource}
 
+
+class zandoAdmin(baseAdmin):
+    import_export_args = {'import_resource_class': zandoResource}
+
 xadmin.site.register(kikuumodel, KikuuAdmin)
 xadmin.site.register(fixmodel, fixAdmin)
 xadmin.site.register(jjshousemodel, jjshouseAdmin)
@@ -203,6 +211,7 @@ xadmin.site.register(bidorbuymodel, bidorbuyAdmin)
 xadmin.site.register(ackermansmodel, ackermansAdmin)
 xadmin.site.register(cjdropshippingmodel, cjdropshippingAdmin)
 xadmin.site.register(mrpmodel, mrpAdmin)
+xadmin.site.register(zandomodel, zandoAdmin)
 
 xadmin.site.register(xadmin.views.CommAdminView, GlobalSettings)
 xadmin.site.register(xadmin.views.BaseAdminView, BaseSettings)

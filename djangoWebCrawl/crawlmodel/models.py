@@ -162,6 +162,14 @@ class mrpmodel(Basemodel):
         verbose_name_plural = 'MRP'
 
 
+class zandomodel(Basemodel):
+    picture=models.ImageField(upload_to="zandomodel_img/",verbose_name='商品图片',default='static/default.jpg',null=True)
+
+    class Meta:
+        db_table = 'zando'
+        verbose_name_plural = 'ZANDO'
+
+
 class settingmodel(models.Model):
     name=models.CharField(max_length=100,verbose_name='电商名称',primary_key=True)
     hour=models.IntegerField(verbose_name='小时',default=0)
