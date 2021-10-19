@@ -5,13 +5,13 @@ import cv2
 
 class oss(object):
     def __init__(self):
-        # Endpoint以杭州为例，其它Region请按实际情况填写。
+        # Endpoint以上海为例，其它Region请按实际情况填写。
         self.endpoint = 'https://oss-cn-shanghai.aliyuncs.com'
         # 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录RAM控制台创建RAM账号。
-        self.access_key_id = 'LTAI5tGqdguZFs9pwwKRSdD9'
-        self.access_key_secret = 'vIo76fslGFhexWvQt5180p5CYeXlX1'
+        self.access_key_id = 'Your access key'
+        self.access_key_secret = 'Your access key secret'
         # 目标Bucket名称。
-        self.bucket_name = 'huchen'
+        self.bucket_name = ''
 
     def get_alibaba_url(self,imgpath,imgname):
         # 目标图片名称。若图片不在Bucket根目录，需携带文件访问路径，例如example/example.jpg。
