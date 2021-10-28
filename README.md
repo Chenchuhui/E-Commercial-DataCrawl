@@ -9,7 +9,7 @@
 
 所需要的包：requests，selenium，pymysql，threading，lxml
 
-Django版本: 2.2
+Django版本: 2.2 （根据需求以及兼容性适当做出些修改）
 
 
 当前已有爬虫代码的南非独立站：KIKUU, FIX, JJHOUSE, SNATCHER, LOVELYWHOLE, KILIMALL, DEAL-HUB, VALUECO, JUMIA, BIDORBUY, ACKERMANS, CJDROPSHIPPING, MRP, ZANDO, YELLOWSUBTRADING （不排除这些网站会更新而导致代码没法用的情况）。
