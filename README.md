@@ -5,4 +5,5 @@
 
 配置环境：
 需要python3以上版本。
-所需要的库：requests，selenium，
+所需要的包：requests，selenium，pymysql，threading，lxml
+Django版本 2.1
