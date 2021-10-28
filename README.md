@@ -26,4 +26,4 @@ Django版本: 2.2
 关于电商选品的内容以及其他电商相关内容，欢迎关注ShopShipShake语雀：https://shopshipshake.yuque.com/shopshipshake/commerce_events/niprt0
 
 
-Contributor: Chenchuhui Hu, Chenyun Zhang, Django 2.2.
+Contributor: Chenchuhui Hu, Chenyun Zhang
