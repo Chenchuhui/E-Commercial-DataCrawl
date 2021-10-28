@@ -24,3 +24,6 @@ Django版本: 2.2
 第三阶段：当拥有1688供应商的链接后，通过爬取每个供应商页面的相关信息作为选取商品的标准。代码中选取的标准为：已售商品数量、服务能力、回头率、旺旺响应、厂房面积、员工人数、评价数目、好评率、商品评分、重量、配送速度。爬取1688网站滑块技术支持：http://www.ben888888.com/
 
 关于电商选品的内容以及其他电商相关内容，欢迎关注ShopShipShake语雀：https://shopshipshake.yuque.com/shopshipshake/commerce_events/niprt0
+
+
+Contributor: Chenchuhui Hu, Chenyun Zhang, Django 2.2.
