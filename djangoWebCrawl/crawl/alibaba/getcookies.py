@@ -22,8 +22,8 @@ def get_new_cookies():
         browser.get('https://www.1688.com/')
         try:
             browser.find_element_by_xpath('//*[@id="alibar"]/div[1]/div[2]/ul/li[3]/a').click()
-            browser.find_element_by_xpath('//input[@name="fm-login-id"]').send_keys('17701670537')
-            browser.find_element_by_xpath('//input[@name="fm-login-password"]').send_keys('997138899174carl')
+            browser.find_element_by_xpath('//input[@name="fm-login-id"]').send_keys('your Taobao Username')
+            browser.find_element_by_xpath('//input[@name="fm-login-password"]').send_keys('Your Taobao Password')
             browser.find_element_by_xpath('//button[@type="submit"]').click()
         except:
             break
