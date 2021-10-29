@@ -44,6 +44,7 @@ def main(db, table):
                     ID = HTML.xpath(f'//*[@id="jm"]/main/div[2]/div[3]/section/div[1]/article[{itemIdx}]/a/@data-id')[0]
                     ID1 = ID + '--1'
                     ID2 = ID + '--2'
+                    print(img)
                     conn.insertData(ID, img, title, price)
                     conn.insertData(ID1, img, title, price)
                     conn.insertData(ID2, img, title, price)
