@@ -1,12 +1,12 @@
 from stage_1 import kikuu, kilimall, fix, jjshouse, lovelywholesale, valueco, wholesale7, \
-    dealhub, snatcher, jumia, bidorbuy, ackermans, cjdropshipping, mrp, zando
+    dealhub, snatcher, jumia, bidorbuy, ackermans, cjdropshipping, mrp, zando, yellowsubtrading
 from alibaba import stage2, stage3
 import time
 import multiprocessing
 
 
 tableList = ['kikuu', 'kilimall', 'fix', 'jjshouse', 'lovelywholesale', 'valueco', 'wholesale7', 'dealhub',
-             'snatcher', 'jumia', 'bidorbuy', 'ackermans', 'cjdropshipping', 'mrp', 'zando']
+             'snatcher', 'jumia', 'bidorbuy', 'ackermans', 'cjdropshipping', 'mrp', 'zando', 'yellowsubtrading']
 
 
 # 得到日期
@@ -84,6 +84,8 @@ def main():
             firstStage(mrp, db, table, index=idx)
         elif table == 'zando':
             firstStage(zando, db, table)
+        elif table == 'yellowsubtrading':
+            firstStage(yellowsubtrading, db, table)
 
     elif stage == 2:
         accessToken = input('Please enter the updated access token:')
