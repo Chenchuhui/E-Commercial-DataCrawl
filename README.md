@@ -29,5 +29,5 @@ Django版本: 2.2 （根据需求以及兼容性适当做出些修改）
 
 关于电商选品的内容以及其他电商相关内容，欢迎关注ShopShipShake语雀：https://shopshipshake.yuque.com/shopshipshake/commerce_events/niprt0
 
-
+Project Owner: Alvin Rong
 Contributor: Chenchuhui Hu, Chenyun Zhang
