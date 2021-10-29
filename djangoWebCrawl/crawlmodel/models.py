@@ -6,7 +6,7 @@ from django.db import models
 class Basemodel(models.Model):
     date = models.DateField(auto_now=True, verbose_name='日期',null=True)
     Image = models.CharField(max_length=1000, verbose_name='图片链接',default=None,null=True)
-    id = models.CharField(max_length=100, verbose_name='产品ID', primary_key=True)
+    id = models.CharField(max_length=200, verbose_name='产品ID', primary_key=True)
     Title = models.CharField(max_length=100, verbose_name='商品名称(电商)',default=None,null=True)
     price = models.CharField(max_length=100, verbose_name='商品价格',default=None,null=True)
     offer_url = models.URLField(max_length=1000, verbose_name='1688商品链接',default=None,null=True)
@@ -169,6 +169,13 @@ class zandomodel(Basemodel):
         db_table = 'zando'
         verbose_name_plural = 'ZANDO'
 
+
+class yellowsubtradingmodel(Basemodel):
+    picture=models.ImageField(upload_to="yellowsubtradingmodel_img/",verbose_name='商品图片',default='static/default.jpg',null=True)
+
+    class Meta:
+        db_table = 'yellowsubtrading'
+        verbose_name_plural = 'YELLOW SUBTRADING'
 
 class settingmodel(models.Model):
     name=models.CharField(max_length=100,verbose_name='电商名称',primary_key=True)

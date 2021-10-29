@@ -550,16 +550,13 @@ class Dashboard(CommAdminView):
                 user=user_obj, key=self.get_portal_key())
             if len(portal_pos):
                 portal_pos = portal_pos[0].value
-                print(UserWidget.objects.filter(page_id=self.get_page_id()))
                 widgets = []
 
                 if portal_pos:
                     user_widgets = dict([(uw.id, uw) for uw in UserWidget.objects.filter(page_id=self.get_page_id())])
-                    print(user_widgets)
                     for col in portal_pos.split('|'):
                         ws = []
                         for wid in col.split(','):
-                            print(wid)
                             try:
                                 widget = user_widgets.get(int(wid))
                                 if widget:
