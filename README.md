@@ -28,4 +28,4 @@ Django版本: 2.2 （根据需求以及兼容性适当做出些修改）
 
 Project Owner: Alvin Rong
 
-Main Contributor: Alvin Rong, Chenchuhui Hu, Chenyun Zhang, Ruiqing Shi
+Main Contributor: Chenchuhui Hu, Chenyun Zhang, Alvin Rong, Ruiqing Shi
