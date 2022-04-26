@@ -7,9 +7,11 @@
 配置环境：
 需要python3以上版本。
 
-所需要的包：requests，selenium，pymysql，threading，lxml
+所需要的包：requests，selenium，pymysql，threading，lxml， oss2， goto
 
 Django版本: 2.2 （根据需求以及兼容性适当做出些修改）
+
+goto安装不上可以安装goto-statement
 
 当前已有爬虫代码的南非独立站：KIKUU, FIX, JJHOUSE, SNATCHER, LOVELYWHOLE, KILIMALL, DEAL-HUB, VALUECO, JUMIA, BIDORBUY, ACKERMANS, CJDROPSHIPPING, MRP, ZANDO, YELLOWSUBTRADING d等（不排除这些网站会更新而导致代码没法用的情况）。
 
